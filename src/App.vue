@@ -1,19 +1,20 @@
 <template>
   <div id="app">
     <div class="sidebar">
-        <h2>스마트잭</h2>
+        <h3>스마트잭</h3>
         <div class="title">
-            <p>{state}</p>
-            <span class="dropdown" :class="{shown: state}">
-                <button href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">menu</button>
-                <div class="dropdown-menu" v-show="state">
-                    <ul>
-                        <li><router-link to="/">One</router-link></li>
-                        <li><router-link to="/two">Two</router-link></li>
-                        <li><router-link to="/three">Three</router-link></li>
-                    </ul>
-                </div>
-            </span>
+            <p>1번문제</p>
+            <div class="dropdown" :class="{shown: state}">
+                <button href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">menu</button>   
+            </div>
+        </div>
+
+        <div class="dropdown-menu" v-show="state">
+          <ul>
+            <li><router-link to="/">One</router-link></li>
+            <li><router-link to="/two">Two</router-link></li>
+            <li><router-link to="/three">Three</router-link></li>
+          </ul>
         </div>
     </div>
 
@@ -49,6 +50,9 @@ export default {
 }
 </script>
 <style>
+body {
+  margin: 0;
+}
 #app {
   display: flex;
   justify-content: space-between;
@@ -59,16 +63,55 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.sidebar {
+  flex: 2;
+  padding: 2%;
+  height: 100vh;
+  background-color: rgb(243, 221, 26);
+  text-align: left;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+h3 {
+  margin:0;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+.title p {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+}
+.title .dropdown {
+  margin: 0;
+  height: 30px;
+}
+.title .dropdown button {
+  width: 80px;
+  height: 30px;
+  border: 0;
+  border-radius: 5px;
+}
+.dropdown-menu  {
+  width: 100%;
+}
+.dropdown-menu ul {
+  padding: 0;
+  list-style: none;
+}
+.dropdown-menu ul li {
+  padding: 15px 0 0 10px;
+  text-decoration-line: none;
+}
+.dropdown-menu ul li:hover {
+  border-radius: 5px;
+  background-color: red;
+}
+.main {
+  flex: 8;
+  height: 100vh;
+  background-color: rgb(236, 232, 232);
 }
 </style>
