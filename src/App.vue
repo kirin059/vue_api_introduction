@@ -3,7 +3,7 @@
     <div class="sidebar">
         <h3>스마트잭</h3>
         <div class="title">
-            <p>1번문제</p>
+            <p>{{title}}</p>
             <div class="dropdown" :class="{shown: state}">
                 <button href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">menu</button>   
             </div>
@@ -11,9 +11,10 @@
 
         <div class="dropdown-menu" v-show="state">
           <ul>
-            <li><router-link to="/">One</router-link></li>
-            <li><router-link to="/two">Two</router-link></li>
-            <li><router-link to="/three">Three</router-link></li>
+            <li @click="this.$store.commit('titleNum', 0)"><router-link to="/one">1번 문제</router-link></li>
+            <li @click="this.$store.commit('titleNum', 1)"><router-link to="/two">2번 문제</router-link></li>
+            <li @click="this.$store.commit('titleNum', 2)"><router-link to="/three">3번 문제</router-link></li>
+    
           </ul>
         </div>
     </div>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 
 export default {
   name: "App",
@@ -34,19 +36,23 @@ export default {
             state: false
             }
         },
-        methods: {
-            toggleDropdown () {
-                this.state = !this.state
-            },
-            close (e) {
-                if (!this.$el.contains(e.target)) {
-                    this.state = false
-                }
-            }
-        },
-        mounted () {
-            document.addEventListener('click', this.close)
-        },
+  methods: {
+      toggleDropdown () {
+          this.state = !this.state
+      },
+      close (e) {
+          if (!this.$el.contains(e.target)) {
+              this.state = false
+          }
+      }
+  },
+  mounted () {
+      document.addEventListener('click', this.close);
+      this.$store.dispatch('getTitleData')
+  },
+  computed: mapState([
+        'title'
+  ]),
 }
 </script>
 <style>
