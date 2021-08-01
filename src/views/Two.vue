@@ -1,8 +1,9 @@
 <template>
   <div class="two">
-    {{ changeTitle }}
+    {{ changeTitle }}222
   </div>
 </template>
+
 <script>
 
 export default {

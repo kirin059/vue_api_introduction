@@ -11,9 +11,8 @@
         <div class="dropdown-menu" v-show="state">
           <ul>
             <li @click="changeTitle"><router-link to="/one">1번 문제</router-link></li>
-            <li ><router-link to="/two">2번 문제</router-link></li>
-            <li ><router-link to="/three">3번 문제</router-link></li>
-    <!-- @click="this.$store.commit('titleNum', 0)" -->
+            <li @click="changeTitle"><router-link to="/two">2번 문제</router-link></li>
+            <li @click="changeTitle"><router-link to="/three">3번 문제</router-link></li>
           </ul>
         </div>
     </div>

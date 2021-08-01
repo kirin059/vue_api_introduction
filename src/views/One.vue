@@ -1,6 +1,6 @@
 <template>
   <div class="one">
-    {{ changeTitle }}
+    {{ title }} 111
   </div>
 </template>
 

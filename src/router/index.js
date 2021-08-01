@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import One from "../views/Two.vue";
+import One from "../views/One.vue";
 import Two from "../views/Two.vue";
 import Three from "../views/Three.vue";
 
