@@ -1,6 +1,6 @@
 <template>
   <div class="one">
-    1번문제ㅇㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㄹㄴㅇㄹㅇㄴ
+    {{ changeTitle }}
   </div>
 </template>
 
@@ -8,6 +8,10 @@
 
 export default {
   name: "one",
-
+  methods: {
+      changeTitle () {
+        this.$store.commit ('setTitle', 0)
+      },
+    },
 };
 </script>

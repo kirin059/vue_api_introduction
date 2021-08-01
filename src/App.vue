@@ -3,39 +3,35 @@
     <div class="sidebar">
         <h3>스마트잭</h3>
         <div class="title">
-            <p>{{title}}</p>
+            <p> {{ setTitle }} </p>
             <div class="dropdown" :class="{shown: state}">
                 <button href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">menu</button>   
             </div>
         </div>
-
         <div class="dropdown-menu" v-show="state">
           <ul>
-            <li @click="this.$store.commit('titleNum', 0)"><router-link to="/one">1번 문제</router-link></li>
-            <li @click="this.$store.commit('titleNum', 1)"><router-link to="/two">2번 문제</router-link></li>
-            <li @click="this.$store.commit('titleNum', 2)"><router-link to="/three">3번 문제</router-link></li>
-    
+            <li @click="changeTitle"><router-link to="/one">1번 문제</router-link></li>
+            <li ><router-link to="/two">2번 문제</router-link></li>
+            <li ><router-link to="/three">3번 문제</router-link></li>
+    <!-- @click="this.$store.commit('titleNum', 0)" -->
           </ul>
         </div>
     </div>
-
     <div class="main">
       <router-view />
     </div>
-    
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
+//import axios from "axios";
 export default {
   name: "App",
   data () {
-            return {
-            state: false
-            }
-        },
+    return {
+      state: false
+    }
+  },
   methods: {
       toggleDropdown () {
           this.state = !this.state
@@ -44,17 +40,31 @@ export default {
           if (!this.$el.contains(e.target)) {
               this.state = false
           }
-      }
+      },
+      changeTitle () {
+        this.$store.commit ('setTitle', 1)
+      },
+      // loadData: function() {
+      //   axios.get('http://recruit.web.smartjackwp.co.kr/menu')
+      //   .then((res) => {
+      //     console.log(res.data.menuList)
+      //     this.title = res.data.menuList
+      //   })
+      // }
   },
+  // computed >> action(this.$store.dispatch), getter(this.$store.getters)
+  computed: {
+   setTitle() {
+     return this.$store.getters.setTitle
+   }
+  },
+  // mounted >> mutation(this.$store.commit) - state값 변경될때 컴포넌트 mount
   mounted () {
       document.addEventListener('click', this.close);
-      this.$store.dispatch('getTitleData')
   },
-  computed: mapState([
-        'title'
-  ]),
 }
 </script>
+
 <style>
 body {
   margin: 0;
@@ -118,6 +128,8 @@ h3 {
 .main {
   flex: 8;
   height: 100vh;
+  padding: 50px 0;
   background-color: rgb(236, 232, 232);
+  font-size: 30px;
 }
 </style>

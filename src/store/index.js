@@ -1,33 +1,39 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import VueAxios from "vue-axios";
-//import App fromm '../App.vue';
 
 Vue.use(Vuex);
-Vue.use(VueAxios, axios);
 
-const URL = "http://recruit.web.smartjackwp.co.kr/menu/";
-
+const URL = "http://recruit.web.smartjackwp.co.kr/menu";
+const loadDatas = axios.get(URL).then((res) => {
+  //console.log(res.data.menuList);
+  return res.data.menuList;
+});
+console.log(loadDatas);
 export default new Vuex.Store({
   state: {
-    title: "",
+    title: "1번 문제",
   },
   mutations: {
     // getTitleData(state, payload) {
     //   state[payload].title;
     // },
-    getTitleData(state, title) {
-      state.title = title;
+    changeTitle(state, payload) {
+      return state.title[payload];
+    },
+  },
+  getters: {
+    setTitle: (state) => {
+      return state.title;
     },
   },
   actions: {
-    loadData({ commit }) {
+    loadData(context) {
       axios
         .get(URL)
-        .then((res) => res.menuList)
-        .then((title) => {
-          commit("getTitleData", title);
+        .then((res) => {
+          console.log(res.data);
+          context.commit("changeTitle", res.data.menuList);
         })
         .catch((error) => {
           console.log(error);
@@ -40,4 +46,4 @@ export default new Vuex.Store({
 // new Vue({
 //   store,
 //   render: h => h(App),
-// }).$mount('#app');d
+// }).$mount('#app');
