@@ -3,16 +3,19 @@
     <div class="sidebar">
         <h3>스마트잭</h3>
         <div class="title">
-            <p> {{ setTitle }} </p>
+            <p v-show="isShow">문제</p>
+            <p v-if="id === 'problem1'"> {{ title[0].title }} </p>
+            <p v-else-if="id === 'problem2'"> {{ title[1].title }} </p>
+            <p v-else-if="id === 'problem3'"> {{ title[2].title }} </p>
             <div class="dropdown" :class="{shown: state}">
-                <button href="#" @click.prevent="toggleDropdown" class="dropdown-toggle">menu</button>   
+                <button href="#" @click.prevent="[toggleDropdown(), loadData()]" class="dropdown-toggle">menu</button>   
             </div>
         </div>
         <div class="dropdown-menu" v-show="state">
           <ul>
-            <li @click="changeTitle"><router-link to="/one">1번 문제</router-link></li>
-            <li @click="changeTitle"><router-link to="/two">2번 문제</router-link></li>
-            <li @click="changeTitle"><router-link to="/three">3번 문제</router-link></li>
+            <li @click="loadData"><router-link to="/one"> 1번 문제</router-link></li>
+            <li @click="loadData"><router-link to="/two"> 2번 문제</router-link></li>
+            <li @click="loadData"><router-link to="/three"> 3번 문제</router-link></li>
           </ul>
         </div>
     </div>
@@ -23,41 +26,36 @@
 </template>
 
 <script>
-//import axios from "axios";
 export default {
   name: "App",
   data () {
     return {
-      state: false
+      state: false,
+      isShow : true
     }
   },
   methods: {
       toggleDropdown () {
-          this.state = !this.state
+          this.state = !this.state,
+          this.isShow = !this.isShow
       },
       close (e) {
           if (!this.$el.contains(e.target)) {
               this.state = false
           }
       },
-      changeTitle () {
-        this.$store.commit ('setTitle', 1)
+      loadData() {
+        this.$store.dispatch('loadData')
       },
-      // loadData: function() {
-      //   axios.get('http://recruit.web.smartjackwp.co.kr/menu')
-      //   .then((res) => {
-      //     console.log(res.data.menuList)
-      //     this.title = res.data.menuList
-      //   })
-      // }
+      // selectTitle() {
+      //   this.$store.commit('selectTitle')
+      // },
   },
-  // computed >> action(this.$store.dispatch), getter(this.$store.getters)
   computed: {
-   setTitle() {
-     return this.$store.getters.setTitle
-   }
+    title() {
+      return this.$store.state.title;
+    },
   },
-  // mounted >> mutation(this.$store.commit) - state값 변경될때 컴포넌트 mount
   mounted () {
       document.addEventListener('click', this.close);
   },

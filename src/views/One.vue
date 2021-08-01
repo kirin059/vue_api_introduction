@@ -1,6 +1,6 @@
 <template>
   <div class="one">
-    {{ title }} 111
+    {{ this.$store.state.title[0].title }} 
   </div>
 </template>
 
@@ -8,10 +8,5 @@
 
 export default {
   name: "one",
-  methods: {
-      changeTitle () {
-        this.$store.commit ('setTitle', 0)
-      },
-    },
 };
 </script>

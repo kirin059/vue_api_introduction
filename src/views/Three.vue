@@ -1,6 +1,6 @@
 <template>
   <div class="three">
-    {{ changeTitle }}333
+   {{ this.$store.state.title[2].title }}
   </div>
 </template>
 

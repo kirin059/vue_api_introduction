@@ -5,35 +5,33 @@ import axios from "axios";
 Vue.use(Vuex);
 
 const URL = "http://recruit.web.smartjackwp.co.kr/menu";
-const loadDatas = axios.get(URL).then((res) => {
-  //console.log(res.data.menuList);
-  return res.data.menuList;
-});
-console.log(loadDatas);
+
 export default new Vuex.Store({
   state: {
-    title: "1번 문제",
+    title: "",
   },
+  // 유일하게 state를 변경할 수 있다
   mutations: {
-    // getTitleData(state, payload) {
-    //   state[payload].title;
+    changeTitle(state, data) {
+      return (state.title = data);
+    },
+    // selectTitle(state, payload) {
+    //   return state.title[payload];
     // },
-    changeTitle(state, payload) {
-      return state.title[payload];
-    },
   },
-  getters: {
-    setTitle: (state) => {
-      return state.title;
-    },
-  },
+  // getters: {
+  //   setTitle: (state) => {
+  //     return state.title;
+  //   },
+  // },
+  // Mutations를 실행시키는 역할
   actions: {
     loadData(context) {
       axios
         .get(URL)
         .then((res) => {
-          console.log(res.data);
-          context.commit("changeTitle", res.data.menuList);
+          const data = res.data.menuList;
+          context.commit("changeTitle", data);
         })
         .catch((error) => {
           console.log(error);
@@ -42,8 +40,3 @@ export default new Vuex.Store({
   },
   //modules: {},
 });
-
-// new Vue({
-//   store,
-//   render: h => h(App),
-// }).$mount('#app');

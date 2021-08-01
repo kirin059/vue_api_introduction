@@ -1,6 +1,6 @@
 <template>
   <div class="two">
-    {{ changeTitle }}222
+   {{ this.$store.state.title[1].title }}
   </div>
 </template>
 
@@ -8,10 +8,5 @@
 
 export default {
   name: "two",
-  methods: {
-      changeTitle () {
-        this.$store.commit ('setTitle', 1)
-      },
-    },
 };
 </script>
