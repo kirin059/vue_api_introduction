@@ -13,6 +13,7 @@ export default new Vuex.Store({
   // 유일하게 state를 변경할 수 있다
   mutations: {
     changeTitle(state, data) {
+      console.log(data);
       return (state.title = data);
     },
     // selectTitle(state, payload) {

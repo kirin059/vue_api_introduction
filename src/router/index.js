@@ -9,7 +9,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/one",
   },
   {
     path: "/one",

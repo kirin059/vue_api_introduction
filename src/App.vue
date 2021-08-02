@@ -4,18 +4,18 @@
         <h3>스마트잭</h3>
         <div class="title">
             <p v-show="isShow">문제</p>
-            <p v-if="id === 'problem1'"> {{ title[0].title }} </p>
-            <p v-else-if="id === 'problem2'"> {{ title[1].title }} </p>
-            <p v-else-if="id === 'problem3'"> {{ title[2].title }} </p>
+            <!-- <p v-if ="titles[0].id === 'problem1'"> {{ titleList[0] }} </p>
+            <p v-else-if ="titles[1].id === 'problem2'"> {{ titleList[1] }} </p>
+            <p v-else if="titles[2].id === 'problem3'"> {{ titleList[2] }} </p> -->
             <div class="dropdown" :class="{shown: state}">
                 <button href="#" @click.prevent="[toggleDropdown(), loadData()]" class="dropdown-toggle">menu</button>   
             </div>
         </div>
         <div class="dropdown-menu" v-show="state">
           <ul>
-            <li @click="loadData"><router-link to="/one"> 1번 문제</router-link></li>
-            <li @click="loadData"><router-link to="/two"> 2번 문제</router-link></li>
-            <li @click="loadData"><router-link to="/three"> 3번 문제</router-link></li>
+            <li @click="[loadData, isShows()]"><router-link to="/one"> {{ titleList[0] }} </router-link></li>
+            <li @click="[loadData, isShows()]"><router-link to="/two"> {{ titleList[1] }} </router-link></li>
+            <li @click="[loadData, isShows()]"><router-link to="/three"> {{ titleList[2] }} </router-link></li>
           </ul>
         </div>
     </div>
@@ -30,15 +30,19 @@ export default {
   name: "App",
   data () {
     return {
-      state: false,
-      isShow : true
+      isShow: true,
+      state: true,
+      titleList: ['1번 문제', '2번 문제', '3번 문제'],
+      titles: this.$store.state.title
     }
   },
   methods: {
-      toggleDropdown () {
-          this.state = !this.state,
-          this.isShow = !this.isShow
+     isShows () {
+          this.isShow = false
       },
+      toggleDropdown () {
+          this.state = !this.state
+      }, 
       close (e) {
           if (!this.$el.contains(e.target)) {
               this.state = false
