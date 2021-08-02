@@ -4,18 +4,19 @@
         <h3>스마트잭</h3>
         <div class="title">
             <p v-show="isShow">문제</p>
-            <!-- <p v-if ="titles[0].id === 'problem1'"> {{ titleList[0] }} </p>
-            <p v-else-if ="titles[1].id === 'problem2'"> {{ titleList[1] }} </p>
-            <p v-else if="titles[2].id === 'problem3'"> {{ titleList[2] }} </p> -->
+            <p v-show ="isFirst"> {{ titleList[0] }} </p>
+            <p v-show ="isSecond"> {{ titleList[1] }} </p>
+            <p v-show ="isThird"> {{ titleList[2] }} </p>
+
             <div class="dropdown" :class="{shown: state}">
                 <button href="#" @click.prevent="[toggleDropdown(), loadData()]" class="dropdown-toggle">menu</button>   
             </div>
         </div>
         <div class="dropdown-menu" v-show="state">
           <ul>
-            <li @click="[loadData, isShows()]"><router-link to="/one"> {{ titleList[0] }} </router-link></li>
-            <li @click="[loadData, isShows()]"><router-link to="/two"> {{ titleList[1] }} </router-link></li>
-            <li @click="[loadData, isShows()]"><router-link to="/three"> {{ titleList[2] }} </router-link></li>
+            <li @click="[loadData(), isShows(), selectTitle1()]"><router-link to="/one"> {{ titleList[0] }} </router-link></li>
+            <li @click="[loadData(), isShows(), selectTitle2()]"><router-link to="/two"> {{ titleList[1] }} </router-link></li>
+            <li @click="[loadData(), isShows(), selectTitle3()]"><router-link to="/three"> {{ titleList[2] }} </router-link></li>
           </ul>
         </div>
     </div>
@@ -33,7 +34,10 @@ export default {
       isShow: true,
       state: true,
       titleList: ['1번 문제', '2번 문제', '3번 문제'],
-      titles: this.$store.state.title
+      titles: this.$store.state.title.id,
+      isFirst: false,
+      isSecond: false,
+      isThird: false
     }
   },
   methods: {
@@ -51,6 +55,22 @@ export default {
       loadData() {
         this.$store.dispatch('loadData')
       },
+      selectTitle1() {
+        this.isFirst = true,
+        this.isSecond = false,
+        this.isThird = false
+      },
+      selectTitle2() {
+        this.isFirst = false,
+        this.isSecond = true,
+        this.isThird = false
+      },
+      selectTitle3() {
+        this.isFirst = false,
+        this.isSecond = false,
+        this.isThird = true
+      },
+
       // selectTitle() {
       //   this.$store.commit('selectTitle')
       // },
