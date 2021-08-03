@@ -70,10 +70,6 @@ export default {
         this.isSecond = false,
         this.isThird = true
       },
-
-      // selectTitle() {
-      //   this.$store.commit('selectTitle')
-      // },
   },
   computed: {
     title() {

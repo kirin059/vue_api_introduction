@@ -1,6 +1,8 @@
 <template>
   <div class="three">
    {{ this.$store.state.title[2].title }}
+   
+    <main>Promise</main>
   </div>
 </template>
 
@@ -15,3 +17,10 @@ export default {
   },
 };
 </script>
+
+
+<style>
+main {
+  margin-top: 50px;
+}
+</style>
