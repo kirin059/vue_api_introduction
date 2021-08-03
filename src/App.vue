@@ -139,7 +139,7 @@
   }
   .dropdown-menu ul li:hover {
     border-radius: 5px;
-    background-color: red;
+    background-color: rgb(233, 230, 230);
   }
   .main {
     flex: 8;
