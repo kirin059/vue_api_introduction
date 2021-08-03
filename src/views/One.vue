@@ -1,7 +1,6 @@
 <template>
   <div class="one">
     {{ this.$store.state.title[0].title }} 
-
     <main>
       <div>
         const URL = "http://recruit.web.smartjackwp.co.kr/menu";<br/>
